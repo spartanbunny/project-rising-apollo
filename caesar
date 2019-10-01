@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+import sys, caesar
+def printHelp():
+    print(""" Usage:
+    -e [string]
+    -d [string]""")
+
+if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        printHelp()
+    elif(len(sys.argv) == 2):
+        if sys.argv[1] == "--help" or sys.argv[1] == "-h":
+            printHelp()
+        else:
+            print("Error. Try '-h' or '--help' for help")
+    elif(len(sys.argv) >= 3):
+        finalStr = ""
+        if len(sys.argv) > 3:
+            isFirstPass = False
+            for ele in sys.argv[2:]:
+                if not isFirstPass:
+                    isFirstPass = True
+                else:
+                    finalStr += " "
+                finalStr += ele
+        else:
+            finalStr = sys.argv[2]
+        if sys.argv[1] == '-e':
+            print("THE ENCRYPTED RESULT IS: \n{}".format(caesar.ROT13(finalStr).encrypt()))
+        elif sys.argv[1] == '-d':
+            print("THE DECRYPTED STRING IS: \n{}".format(caesar.ROT13(finalStr).decrypt()))
